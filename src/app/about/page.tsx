@@ -23,7 +23,7 @@ const beliefs = [
 export default function About() {
   return (
     <>
-      <PageHead eyebrow="About us" title={<>A church for anyone who wants to be changed.</>} photo="/photos/worship-hands-raised.jpg">
+      <PageHead eyebrow="About us" title={<>A church for anyone who wants to be changed.</>} photo="/photos/worship-room-standing.jpg">
         Transformation Church launched on {org.launched}. We’re a young, growing church family in Northeast Georgia.
       </PageHead>
 
@@ -53,8 +53,10 @@ export default function About() {
               for the glory of God.
             </p>
             <p>
-              Today we gather in Lula, at {org.street}. We’re a SEND Network church plant of the North
-              American Mission Board and a Southern Baptist congregation.
+              In the summer of 2026 we moved into a home of our own in Lula, at the corner of Main &amp;
+              Banks beside Lula Pharmacy. We’re a SEND Network church plant of the North American Mission
+              Board, part of the Georgia Baptist Mission Board family, and a Southern Baptist
+              congregation.
             </p>
           </div>
         </div>

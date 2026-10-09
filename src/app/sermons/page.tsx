@@ -13,7 +13,7 @@ export default function Sermons() {
   const [current, ...rest] = series;
   return (
     <>
-      <PageHead eyebrow="Sermons" title={<>Open the Book with us.</>} photo="/photos/sermon-full-room.jpg" position="center 35%">
+      <PageHead eyebrow="Sermons" title={<>Open the Book with us.</>} photo="/photos/worship-team-blue.jpg" position="center 40%">
         Missed a Sunday? Catch up on any message, any time, from your phone or your couch.
       </PageHead>
 

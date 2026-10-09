@@ -19,6 +19,7 @@ export const org = {
   state: "Georgia",
   stateCode: "GA",
   zip: "30554",
+  landmark: "Corner of Main & Banks, beside Lula Pharmacy",
   mailing: "P.O. Box 116, Lula, GA 30554",
   // Pastor Mike's number, base64'd so it is never in the HTML for scrapers.
   phoneB64: "NDc4OTU0NzExNQ==",
@@ -63,6 +64,8 @@ export type Outreach = {
   place: string;
   blurb: string;
   needs: string[];
+  photo?: string;
+  photoAlt?: string;
 };
 
 export const outreaches: Outreach[] = [
@@ -71,13 +74,15 @@ export const outreaches: Outreach[] = [
     name: "Back-to-School Backpacks",
     from: "empty-handed",
     to: "ready",
-    when: "Every summer, before the first bell",
+    when: "Every July, before the first bell",
     date: "",
     endsOn: "",
-    place: "",
+    place: "East Hall Community Center, 3911 P Davidson Rd, Gainesville",
     blurb:
-      "Free backpacks, packed with school supplies, for the kids of Lula and East Hall. No paperwork and no catch, just a good start to the year and a church family cheering them on.",
-    needs: ["Backpacks", "Notebooks & folders", "Pencils, crayons, glue", "Packing night helpers"],
+      "FREE backpacks, FREE school supplies and a FREE BBQ lunch for the kids of Lula and East Hall. Tables full of backpacks, a kitchen full of volunteers, and a church family cheering every kid into the new school year. (Each child must be present.)",
+    needs: ["Backpacks", "Notebooks & folders", "Pencils, crayons, glue", "Kitchen & lunch crew"],
+    photo: "/photos/backpacks-volunteers.jpg",
+    photoAlt: "Two volunteers smiling behind tables piled with free backpacks at the July 2026 giveaway",
   },
   {
     slug: "feeding",
@@ -104,6 +109,8 @@ export const outreaches: Outreach[] = [
     blurb:
       "A big, loud, free day for children and their families: games, food, a Bible story and a church that is genuinely glad to meet them.",
     needs: ["Game leaders", "Grill crew", "Face painters", "Prizes & candy"],
+    photo: "/photos/kids-girls.jpg",
+    photoAlt: "Three smiling girls at Transformation Church",
   },
   {
     slug: "christmas",
@@ -117,8 +124,29 @@ export const outreaches: Outreach[] = [
     blurb:
       "Lula’s Christmas night out. Carols, cocoa, lights and the story of the first Christmas, told in the open air for the whole town. Everyone is welcome.",
     needs: ["Hot cocoa table", "Carolers", "Set-up crew", "Hand warmers"],
+    photo: "/photos/christmas-candlelight.jpg",
+    photoAlt: "The church family singing by candlelight at a Christmas service",
   },
 ];
+
+/**
+ * One-off events. Each disappears by itself the day after `endsOn`.
+ */
+export const events = [
+  {
+    name: "Christmas Concert with Jeff Cleghorn",
+    date: "Sunday, December 6 · 6:00 PM",
+    endsOn: "2026-12-06",
+    place: "Transformation Church, 6102-C Banks St.",
+    blurb:
+      "A night of Christmas music with Pastor Mike’s friend Jeff Cleghorn, a full-time music evangelist whose latest recording was made with the Prague Philharmonic Orchestra. Bring the whole family and a neighbor.",
+  },
+];
+
+export function upcomingEvents(now = new Date()) {
+  const today = now.toISOString().slice(0, 10);
+  return events.filter((e) => e.endsOn >= today);
+}
 
 /** The next date for an outreach, or "" once it has passed. */
 export function upcomingDate(o: Outreach, now = new Date()) {
@@ -162,7 +190,7 @@ export const leaders = [
     photo: "/photos/david-berliner.jpg",
     bio: [
       "David started running sound for a youth choir in Cleveland, Georgia in the mid-’70s and served Concord Baptist in Clermont for 22 years, helping launch three satellite campuses.",
-      "Today he edits and uploads our weekly sermons, runs the sound desk and looks after everything technical, so a portable church plant sounds like home every Sunday.",
+      "Today he edits and uploads our weekly sermons, runs the sound desk and looks after everything technical, so every Sunday in our new Lula home sounds like worship and not like wires.",
     ],
   },
 ];

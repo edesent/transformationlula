@@ -19,7 +19,7 @@ const ways = [
 export default function Give() {
   return (
     <>
-      <PageHead eyebrow="Give" title={<>Help us transform lives in <span className="text-sun">our town.</span></>} photo="/photos/worship-hands-raised.jpg">
+      <PageHead eyebrow="Give" title={<>Help us transform lives in <span className="text-sun">our town.</span></>} photo="/photos/congregation-seated.jpg">
         Every gift helps reach our East Hall community and the nations for Christ.
       </PageHead>
 

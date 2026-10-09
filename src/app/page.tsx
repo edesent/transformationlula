@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Mark } from "@/components/Mark";
 import { Pair } from "@/components/PageHead";
 import { Transform } from "@/components/Transform";
-import { org, outreaches, series, services, upcomingDate } from "@/lib/site";
+import { org, outreaches, series, services, upcomingDate, upcomingEvents } from "@/lib/site";
 
 // Outreach dates drop off by themselves once they pass.
 export const revalidate = 3600;
@@ -14,49 +14,49 @@ export default function Home() {
       {/* ───────── Hero ───────── */}
       <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-white">
         <Image
-          src="/photos/worship-hands-raised.jpg"
-          alt="The Transformation Church family worshipping with hands raised"
+          src="/photos/baptism-lake.jpg"
+          alt="A new believer coming up out of the lake at a Transformation Church baptism, celebrating"
           fill
           priority
           sizes="100vw"
-          className="-z-20 object-cover object-[60%_30%]"
+          className="-z-20 object-cover object-[46%_30%]"
         />
-        <div className="wash absolute inset-0 -z-10" />
-        <Mark
-          draw
-          strokeWidth={1.4}
-          className="pointer-events-none absolute -right-[12vw] top-[12vh] -z-10 hidden h-[78vh] w-[78vw] max-w-[1100px] text-sky/45 md:block"
-        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(5_15_34/0.9)_0%,rgb(5_15_34/0.62)_26%,rgb(5_15_34/0.12)_48%,rgb(5_15_34/0.1)_64%,rgb(5_15_34/0.88)_100%)]" />
 
-        <div className="wrap flex flex-1 flex-col justify-end pb-10 pt-32 sm:pb-14">
-          <p className="eyebrow rise text-sky">Transformation Church · Lula, Georgia</p>
-          <h1 className="display shadowed mt-5 text-[clamp(2.4rem,10.6vw,9.6rem)] [font-variation-settings:'wdth'_100]">
-            <span className="rise block">Be</span>
-            <span className="rise block" style={{ animationDelay: "0.12s" }}>
-              transformed.
-            </span>
-          </h1>
-          <p
-            className="display rise shadowed mt-4 text-[clamp(1.9rem,5.4vw,4.4rem)] text-white"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <Transform />
-          </p>
-          <p className="rise mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl" style={{ animationDelay: "0.4s" }}>
-            A place where everyone can meet Jesus, find a church family and feel at home.
-            Come as you are this Sunday.
-          </p>
-          <div className="rise mt-8 flex flex-wrap gap-3" style={{ animationDelay: "0.5s" }}>
-            <Link href="/visit" className="btn btn-sun">
-              Plan your visit
-            </Link>
-            <Link href="/sermons" className="btn btn-ghost">
-              Watch a sermon
-            </Link>
+        <div className="wrap flex flex-1 flex-col justify-between gap-10 pb-10 pt-28 sm:pt-32 lg:pt-28">
+          <div>
+            <p className="eyebrow rise text-sky">Transformation Church · Lula, Georgia</p>
+            <h1 className="display shadowed mt-5 text-[clamp(2.4rem,10.6vw,9.6rem)] [font-variation-settings:'wdth'_100] lg:text-[clamp(5rem,7.3vw,7.3rem)]">
+              <span className="rise block lg:inline">Be </span>
+              <span className="rise block lg:inline" style={{ animationDelay: "0.12s" }}>
+                transformed.
+              </span>
+            </h1>
+            <p
+              className="display rise shadowed mt-3 text-[clamp(1.9rem,5.4vw,4.4rem)] text-white lg:text-[clamp(2.4rem,3.6vw,3.6rem)]"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <Transform />
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <p className="rise max-w-md text-lg font-semibold leading-snug shadowed sm:text-xl" style={{ animationDelay: "0.45s" }}>
+              Everyone is welcome. Nobody is perfect.{" "}
+              <span className="text-sun">Transformation is happening.</span>
+            </p>
+            <div className="rise flex flex-wrap gap-3" style={{ animationDelay: "0.55s" }}>
+              <Link href="/visit" className="btn btn-sun">
+                Plan your visit
+              </Link>
+              <Link href="/sermons" className="btn btn-ghost bg-ink/30 backdrop-blur">
+                Watch a sermon
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-white/15 bg-ink/60 backdrop-blur">
+        <div className="border-t border-white/15 bg-ink/70 backdrop-blur">
           <div className="wrap grid gap-4 py-5 text-sm sm:grid-cols-3 sm:gap-8">
             {services.map((s) => (
               <p key={s.day}>
@@ -71,10 +71,29 @@ export default function Home() {
               <a href={org.directions} className="mt-1 block text-base font-bold hover:text-sun">
                 {org.street}, {org.city} →
               </a>
+              <span className="block text-white/55">Beside Lula Pharmacy</span>
             </p>
           </div>
         </div>
       </section>
+
+      {/* ───────── Coming up (drops off by itself) ───────── */}
+      {upcomingEvents().map((e) => (
+        <section key={e.name} className="bg-sun text-ink">
+          <div className="wrap flex flex-col gap-4 py-7 md:flex-row md:items-center md:justify-between md:gap-10">
+            <div className="flex items-center gap-5">
+              <span className="eyebrow shrink-0 rounded-full bg-ink px-3 py-1.5 text-sun">Coming up</span>
+              <p>
+                <span className="block text-xl font-extrabold">{e.name}</span>
+                <span className="font-semibold">{e.date} · {e.place}</span>
+              </p>
+            </div>
+            <Link href="/outreach#events" className="btn btn-ink shrink-0 self-start md:self-auto">
+              Details
+            </Link>
+          </div>
+        </section>
+      ))}
 
       {/* ───────── Romans 12:2 ───────── */}
       <section className="relative overflow-hidden bg-night py-24 text-white sm:py-32">
@@ -133,6 +152,11 @@ export default function Home() {
                     </p>
                   </div>
                   <div className={i % 2 ? "lg:order-1" : ""} data-reveal>
+                    {o.photo && (
+                      <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-2xl">
+                        <Image src={o.photo} alt={o.photoAlt ?? ""} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+                      </div>
+                    )}
                     <p className="text-lg leading-relaxed text-white/80">{o.blurb}</p>
                     <p className="mt-5 text-sm font-bold text-sky">
                       {next ? <>Next: {next}</> : o.when}
@@ -163,8 +187,8 @@ export default function Home() {
         <div className="wrap grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-mist" data-reveal>
             <Image
-              src="/photos/sermon-full-room.jpg"
-              alt="A full room listening to the sermon on a Sunday morning"
+              src="/photos/congregation-seated.jpg"
+              alt="Families seated together on a Sunday morning in the Lula sanctuary"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
@@ -358,7 +382,7 @@ export default function Home() {
 
       {/* ───────── Closing ───────── */}
       <section className="relative isolate overflow-hidden bg-ink py-28 text-center text-white sm:py-40">
-        <Image src="/photos/worship-hands-raised.jpg" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-35" />
+        <Image src="/photos/worship-band.jpg" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-35" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/70 to-ink" />
         <div className="wrap">
           <Mark draw className="mx-auto h-16 w-24 text-sky" strokeWidth={4} />
@@ -366,8 +390,8 @@ export default function Home() {
             See you Sunday.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/80" data-reveal>
-            10:00 AM at {org.street}, {org.city}, Georgia. There’s plenty of parking, and there will
-            be smiling people at the front door.
+            10:00 AM at {org.street}, {org.city}, at the corner of Main & Banks beside Lula Pharmacy.
+            There’s plenty of parking, and smiling people at the front door.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3" data-reveal>
             <Link href="/visit" className="btn btn-sun">

@@ -37,6 +37,7 @@ export default function Footer() {
             {org.street}
             <br />
             {org.city}, {org.stateCode} {org.zip}
+            <span className="block text-sm text-white/55">Beside Lula Pharmacy</span>
           </address>
           <a href={org.directions} className="mt-2 inline-block text-sm font-bold text-sun hover:underline">
             Get directions →

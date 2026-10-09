@@ -87,11 +87,20 @@ redirect old SnapPages URLs (`/leadership`, `/what-we-believe`, `/faq-s`,
 
 ## To confirm with the church
 
-- **Outreach copy is a draft.** The four outreaches came from their grant
-  application; the descriptions, "what helps most" lists and seasons are our
-  best guess. Confirm dates, places and details.
+- **Outreach copy is partly a draft.** The back-to-school giveaway facts are
+  from their July 2026 Facebook posts (Sat Jul 25, East Hall Community Center,
+  free BBQ lunch). Feeding the homeless, the kids outreach event and Christmas in
+  the Park came only from the grant form, so descriptions, seasons and "what
+  helps most" are our best guess. The kids-outreach photo is from a Sunday, and
+  the Christmas photo is a candlelight service, not the park event.
+- **Christmas Concert** with Jeff Cleghorn, Sun Dec 6 2026 at 6 PM (from FB),
+  shows on the home page and /outreach until `endsOn` passes.
+- **Photos** come from their Facebook page, their Google Maps listing (the
+  building exterior, booth) and their old site. The homepage hero is their lake
+  baptism photo; confirm they're happy featuring the person being baptized.
 - **Parking:** their old FAQ mentions the East Hall Community Center, where they
-  launched. The new site just says "plenty of parking".
+  launched. They moved to Lula in June 2026; the new site says "corner of Main &
+  Banks, beside Lula Pharmacy, plenty of parking".
 - **Phone** (478) 954-7115 came from the grant form (Pastor Mike). Confirm it's
   OK to publish.
 - The contact page on their old site says ZIP 30557; everything else says 30554.

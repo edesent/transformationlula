@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function Grow() {
   return (
     <>
-      <PageHead eyebrow="Next steps" title={<>Belong. Serve. <span className="text-sun">Pray.</span></>} photo="/photos/worship-hands-raised.jpg">
+      <PageHead eyebrow="Next steps" title={<>Belong. Serve. <span className="text-sun">Pray.</span></>} photo="/photos/altar-prayer.jpg">
         Transformation is a lifelong journey, and nobody walks it alone. Here’s where to take your next step.
       </PageHead>
 
@@ -68,7 +68,7 @@ export default function Grow() {
             <p className="eyebrow text-sky">Serve</p>
             <h2 className="display mt-4 text-[clamp(2.4rem,5.5vw,4.6rem)]">There’s a spot with your name on it.</h2>
             <p className="mt-6 text-lg leading-relaxed text-white/75">
-              We’re a portable church plant, so every Sunday takes many hands: first impressions, kids,
+              We’re a young church plant in a brand-new home, so every Sunday takes many hands: first impressions, kids,
               music, media, NextGen and much more. Our First Impressions team serves behind the scenes
               too: security, medical response, coffee baristas and greeters.
             </p>

@@ -21,7 +21,7 @@ export default async function Contact({ searchParams }: { searchParams: Promise<
   const { topic } = await searchParams;
   return (
     <>
-      <PageHead eyebrow="Contact" title={<>Let’s talk.</>} photo="/photos/sermon-full-room.jpg" position="center 35%">
+      <PageHead eyebrow="Contact" title={<>Let’s talk.</>} photo="/photos/building-banks-st.jpg" position="center 20%">
         A question about the church, a prayer request or a specific need: we’d love to hear from you.
       </PageHead>
 
@@ -39,6 +39,7 @@ export default async function Contact({ searchParams }: { searchParams: Promise<
                 <br />
                 {org.city}, GA {org.zip}
               </p>
+              <p className="text-mute">{org.landmark}</p>
               <a href={org.directions} className="font-bold text-royal hover:underline">
                 Get directions →
               </a>
