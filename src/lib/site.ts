@@ -1,0 +1,203 @@
+/**
+ * Everything about the church in one place. Edit values here and every page
+ * updates. Empty strings ("") show as a dashed "fill in" chip on the site.
+ */
+
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://transformationlula.dfd.llc";
+
+// While the site lives on a preview address it hides itself from search
+// engines. Setting NEXT_PUBLIC_SITE_URL to their real domain flips this off.
+export const isDemo = !/wearetransformation\.org$/.test(new URL(siteUrl).hostname);
+
+export const org = {
+  name: "Transformation Church",
+  short: "Transformation",
+  tagline: "Be transformed.",
+  street: "6102-C Banks St.",
+  city: "Lula",
+  state: "Georgia",
+  stateCode: "GA",
+  zip: "30554",
+  mailing: "P.O. Box 116, Lula, GA 30554",
+  // Pastor Mike's number, base64'd so it is never in the HTML for scrapers.
+  phoneB64: "NDc4OTU0NzExNQ==",
+  launched: "February 26, 2023",
+  directions:
+    "https://www.google.com/maps/dir/?api=1&destination=6102-C+Banks+St,+Lula,+GA+30554",
+  facebook: "https://www.facebook.com/tcgainesville",
+  instagram: "https://www.instagram.com/tcgainesville/",
+  give: "https://subsplash.com/u/-HWRWRC/give",
+  sermons: "https://subsplash.com/u/-HWRWRC/media",
+};
+
+export const services = [
+  { day: "Sunday", name: "Worship", time: "10:00 AM", note: "Kids’ church, nursery through 5th grade" },
+  { day: "Wednesday", name: "Adult Bible Study", time: "6:30 PM", note: "In the Activity Room" },
+];
+
+export const nav = [
+  { href: "/about", label: "About" },
+  { href: "/outreach", label: "Outreach" },
+  { href: "/sermons", label: "Sermons" },
+  { href: "/grow", label: "Grow" },
+  { href: "/give", label: "Give" },
+];
+
+/**
+ * The four outreaches. `from` and `to` are the before → after shown with a
+ * strike-through on the site.
+ *
+ * Dates: put the next date in `date` (shown as written) and the last day in
+ * `endsOn` (YYYY-MM-DD). After `endsOn` passes, the date line disappears by
+ * itself and the season (`when`) shows instead. Update them each year.
+ */
+export type Outreach = {
+  slug: string;
+  name: string;
+  from: string;
+  to: string;
+  when: string;
+  date: string;
+  endsOn: string;
+  place: string;
+  blurb: string;
+  needs: string[];
+};
+
+export const outreaches: Outreach[] = [
+  {
+    slug: "backpacks",
+    name: "Back-to-School Backpacks",
+    from: "empty-handed",
+    to: "ready",
+    when: "Every summer, before the first bell",
+    date: "",
+    endsOn: "",
+    place: "",
+    blurb:
+      "Free backpacks, packed with school supplies, for the kids of Lula and East Hall. No paperwork and no catch, just a good start to the year and a church family cheering them on.",
+    needs: ["Backpacks", "Notebooks & folders", "Pencils, crayons, glue", "Packing night helpers"],
+  },
+  {
+    slug: "feeding",
+    name: "Feeding the Homeless",
+    from: "hungry",
+    to: "fed",
+    when: "Throughout the year",
+    date: "",
+    endsOn: "",
+    place: "",
+    blurb:
+      "Hot meals carried to neighbors who are living without a home. We bring food, sit down, learn names and pray with anyone who would like it.",
+    needs: ["Cooks", "Drivers", "Bottled water", "Socks & hygiene kits"],
+  },
+  {
+    slug: "kids",
+    name: "Kids Outreach Event",
+    from: "strangers",
+    to: "friends",
+    when: "Once a year",
+    date: "",
+    endsOn: "",
+    place: "",
+    blurb:
+      "A big, loud, free day for children and their families: games, food, a Bible story and a church that is genuinely glad to meet them.",
+    needs: ["Game leaders", "Grill crew", "Face painters", "Prizes & candy"],
+  },
+  {
+    slug: "christmas",
+    name: "Christmas in the Park",
+    from: "alone",
+    to: "together",
+    when: "Every December",
+    date: "",
+    endsOn: "",
+    place: "",
+    blurb:
+      "Lula’s Christmas night out. Carols, cocoa, lights and the story of the first Christmas, told in the open air for the whole town. Everyone is welcome.",
+    needs: ["Hot cocoa table", "Carolers", "Set-up crew", "Hand warmers"],
+  },
+];
+
+/** The next date for an outreach, or "" once it has passed. */
+export function upcomingDate(o: Outreach, now = new Date()) {
+  if (!o.date || !o.endsOn) return "";
+  const today = now.toISOString().slice(0, 10);
+  return o.endsOn >= today ? o.date : "";
+}
+
+export const leaders = [
+  {
+    name: "Mike & Julie Dorough",
+    role: "Lead / Founding Pastor",
+    photo: "/photos/mike-and-julie-dorough.jpg",
+    bio: [
+      "Pastor Mike is a Cordele native, a University of Georgia graduate (UGA Concert Band) and holds a master’s degree from Liberty Baptist Theological Seminary. Prince Avenue Baptist Church in Athens licensed him to the gospel ministry in 1990.",
+      "After almost seven years as a youth pastor in Virginia, he served at Second Baptist Warner Robins from 1996. In 2016 God called the Doroughs to Northeast Georgia, and today Mike and Julie are SEND Network church planters with the North American Mission Board. He has led mission trips to Russia, Germany, Brazil, Poland, the Bahamas and Nicaragua.",
+      "Mike and Julie married in 1988. Julie, also a UGA graduate, leads our Children’s Ministry. They have two grown children and two grandsons, and they love Georgia Bulldog sports and the beach. Mike’s life verse is Romans 8:28; his favorite song is “Because He Lives.”",
+    ],
+  },
+  {
+    name: "Brad & Amanda Thomas",
+    role: "Associate Pastor",
+    photo: "/photos/brad-and-amanda-thomas.jpg",
+    bio: [
+      "Brad grew up in a minister’s home and trusted Christ at fourteen during a revival service. He served our country in the U.S. Navy and works in telecommunications. He answered the call to preach in 2006 and was ordained at Glory Road Baptist Church in 2011.",
+      "Brad and Amanda (“Poo”) have five children, two sons-in-law and a granddaughter, Summer. Brad loves fishing, hunting and hiking, especially in the mountains of Montana and Wyoming. Favorite verse: Ephesians 1:6.",
+    ],
+  },
+  {
+    name: "Lucas & Bethany Maloch",
+    role: "Worship Pastor",
+    photo: "/photos/lucas-and-bethany-maloch.jpg",
+    bio: [
+      "Lucas-Waylon is the second person licensed to gospel ministry by Transformation Church. An East Hall High graduate, he has played guitar and other stringed instruments for more than sixteen years. Bethany is a kindergarten paraprofessional with Gainesville City Schools.",
+      "They love anything outdoors: hiking, camping, kayaking. Lucas is restoring his grandpa’s 1949 Dodge Forestry truck with his dad. His favorite hymn is “I Saw the Light.”",
+    ],
+  },
+  {
+    name: "David Berliner",
+    role: "Director of Technology",
+    photo: "/photos/david-berliner.jpg",
+    bio: [
+      "David started running sound for a youth choir in Cleveland, Georgia in the mid-’70s and served Concord Baptist in Clermont for 22 years, helping launch three satellite campuses.",
+      "Today he edits and uploads our weekly sermons, runs the sound desk and looks after everything technical, so a portable church plant sounds like home every Sunday.",
+    ],
+  },
+];
+
+export const series = [
+  { title: "People Get Ready: Revelation", note: "Verse by verse through Revelation", img: "/series/revelation.jpg" },
+  { title: "Why Are We Here in Lula?", note: "Connect people with Jesus", img: "/series/why-are-we-here-in-lula.jpg" },
+  { title: "Take It Up a Notch", note: "2 Peter 1:3–11", img: "/series/take-it-up-a-notch.jpg" },
+  { title: "He Is Risen", note: "Easter", img: "/series/he-is-risen.jpg" },
+  { title: "Relentless Love", note: "The Book of Hosea", img: "/series/relentless-love.jpg" },
+  { title: "Stand", note: "A series on standing firm", img: "/series/stand.jpg" },
+  { title: "The Book of James", note: "Real talk. Real life. Real faith.", img: "/series/book-of-james.jpg" },
+  { title: "The Book of John", note: "That you may believe", img: "/series/book-of-john.jpg" },
+  { title: "Single-Topic Sermons", note: "One Sunday, one subject", img: "/series/single-topic-sermons.jpg" },
+];
+
+export const memberCourse = [
+  { part: 1, title: "Our Message", length: "25:16", youtube: "NbFDdz-qm64", pdf: "https://storage2.snappages.site/HWRWRC/assets/files/New-Member-Guide-Part-1.pdf" },
+  { part: 2, title: "Our Model", length: "9:17", youtube: "7oYfFEtNzKI", pdf: "https://storage2.snappages.site/HWRWRC/assets/files/New-Member-Guide-Part-2.pdf" },
+  { part: 3, title: "Our Mission", length: "19:48", youtube: "_8hmE02rq44", pdf: "https://storage2.snappages.site/HWRWRC/assets/files/New-Member-Guide-Part-3.pdf" },
+  { part: 4, title: "Our Methods", length: "7:09", youtube: "glT3UGtgFeQ", pdf: "https://storage2.snappages.site/HWRWRC/assets/files/New-Member-Guide-Part-4.pdf" },
+  { part: 5, title: "Our Challenge", length: "23:10", youtube: "JG7I-4UKFq8", pdf: "https://storage2.snappages.site/HWRWRC/assets/files/New-Member-Guide-Part-5.pdf" },
+];
+
+export const serveTeams = [
+  "Ushers & greeters",
+  "Children’s workers",
+  "Set-up / tear-down",
+  "Media (ProPresenter, lights, audio)",
+  "NextGen leaders",
+  "Community outreach",
+  "Worship band",
+  "Welcome center",
+  "Special events",
+  "Parking",
+  "Coffee bar",
+  "Prayer team",
+];
