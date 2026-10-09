@@ -291,21 +291,36 @@ export default function Home() {
               All sermons
             </Link>
           </div>
-        </div>
-        <div className="mt-10 flex snap-x gap-5 overflow-x-auto px-4 pb-4 sm:px-8 xl:px-[max(2rem,calc((100vw-74rem)/2))]">
-          {series.slice(0, 6).map((s) => (
-            <Link
-              key={s.title}
-              href="/sermons"
-              className="group w-[78vw] shrink-0 snap-start sm:w-[24rem]"
-            >
-              <div className="relative aspect-video overflow-hidden rounded-2xl bg-night">
-                <Image src={s.img} alt={`${s.title} sermon series`} fill sizes="400px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <p className="mt-4 text-lg font-bold group-hover:text-sky">{s.title}</p>
-              <p className="text-sm text-white/55">{s.note}</p>
-            </Link>
-          ))}
+
+          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-5 lg:grid-cols-4 lg:grid-rows-2">
+            {series.slice(0, 5).map((s, i) =>
+              i === 0 ? (
+                <Link
+                  key={s.title}
+                  href="/sermons"
+                  data-reveal
+                  className="group relative isolate col-span-2 block overflow-hidden rounded-2xl bg-night lg:row-span-2"
+                >
+                  <div className="relative aspect-video lg:aspect-auto lg:h-full">
+                    <Image src={s.img} alt={`${s.title} sermon series`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="-z-10 object-cover object-[30%_50%] transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/80 to-transparent p-5 pt-16">
+                    <p className="eyebrow text-sun">Current series</p>
+                    <p className="mt-1 text-2xl font-extrabold group-hover:text-sky sm:text-3xl">{s.title}</p>
+                    <p className="text-sm text-white/65">{s.note}</p>
+                  </div>
+                </Link>
+              ) : (
+                <Link key={s.title} href="/sermons" data-reveal className="group flex flex-col">
+                  <div className="relative aspect-video overflow-hidden rounded-xl bg-night">
+                    <Image src={s.img} alt={`${s.title} sermon series`} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                  <p className="mt-3 text-[0.95rem] font-bold leading-tight group-hover:text-sky sm:text-lg">{s.title}</p>
+                  <p className="hidden text-sm text-white/55 sm:block">{s.note}</p>
+                </Link>
+              ),
+            )}
+          </div>
         </div>
       </section>
 
