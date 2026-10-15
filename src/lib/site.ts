@@ -4,7 +4,7 @@
  */
 
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://transformationlula.dfd.llc";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://transformationlula.elijahdesent.com";
 
 // While the site lives on a preview address it hides itself from search
 // engines. Setting NEXT_PUBLIC_SITE_URL to their real domain flips this off.

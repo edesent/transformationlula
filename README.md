@@ -5,7 +5,7 @@ Transformation Church · 6102-C Banks St., Lula, GA 30554 · Pastor Mike Dorough
 Next.js **16.2.1** (App Router) · React 19 · Tailwind CSS **v4** · deployed on
 Vercel, which rebuilds automatically on every push to `main`.
 
-Preview: https://transformationlula.dfd.llc (hidden from search engines).
+Preview: https://transformationlula.elijahdesent.com (hidden from search engines).
 Their current site: https://wearetransformation.org (SnapPages + Subsplash).
 
 ## The idea

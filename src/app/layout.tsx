@@ -29,13 +29,14 @@ export const metadata: Metadata = {
     template: "%s · Transformation Church",
   },
   description,
+  appleWebApp: { title: "Transformation" },
   openGraph: {
     type: "website",
     siteName: org.name,
     title: "Be transformed. Transformation Church, Lula GA",
     description,
-    images: ["/photos/worship-hands-raised.jpg"],
   },
+  twitter: { card: "summary_large_image" },
   robots: isDemo ? { index: false, follow: false } : undefined,
   alternates: { canonical: "/" },
 };
