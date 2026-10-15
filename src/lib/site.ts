@@ -30,7 +30,7 @@ export const org = {
   instagram: "https://www.instagram.com/tcgainesville/",
   youtube: "https://www.youtube.com/@TransformationChurchofLula",
   give: "https://subsplash.com/u/-HWRWRC/give",
-  sermons: "https://subsplash.com/u/-HWRWRC/media",
+  sermons: "https://subsplash.com/+5wc3/media",
 };
 
 export const services = [
@@ -196,30 +196,35 @@ export const leaders = [
   },
 ];
 
+// Subsplash links: a series is `${media}/l/<code>-<name>`, one sermon is
+// `${media}/d/<code>-<name>`. Copy them from the library; the old `/u/-HWRWRC/media`
+// addresses show "Page not found".
+const media = "https://subsplash.com/u/transformationchurch-ga/media";
+
 /**
  * Sermon series, newest first. The first one shows as the current series.
  * `url` is the series page in their Subsplash media library. `messages` is the
  * count for a finished series; leave it off while a series is still running.
  */
 export const series: { title: string; note: string; img: string; url: string; messages?: number }[] = [
-  { title: "People Get Ready: Revelation", note: "Verse by verse through Revelation", img: "/series/revelation.jpg", url: `${org.sermons}/ms/hn45gm4` },
-  { title: "Why Are We Here in Lula?", note: "Connect people with Jesus", img: "/series/why-are-we-here-in-lula.jpg", url: `${org.sermons}/ms/96775vh`, messages: 4 },
-  { title: "Take It Up a Notch", note: "2 Peter 1:3–11", img: "/series/take-it-up-a-notch.jpg", url: `${org.sermons}/ms/95sz832`, messages: 2 },
-  { title: "He Is Risen", note: "Easter", img: "/series/he-is-risen.jpg", url: `${org.sermons}/ms/zp3mdzq`, messages: 4 },
-  { title: "Relentless Love", note: "The Book of Hosea", img: "/series/relentless-love.jpg", url: `${org.sermons}/ms/v23txv7`, messages: 9 },
-  { title: "Stand", note: "A series on standing firm", img: "/series/stand.jpg", url: `${org.sermons}/ms/7xdqmmf`, messages: 4 },
-  { title: "The Book of James", note: "Real talk. Real life. Real faith.", img: "/series/book-of-james.jpg", url: `${org.sermons}/ms/g5t4m7d`, messages: 10 },
-  { title: "The Book of John", note: "That you may believe", img: "/series/book-of-john.jpg", url: `${org.sermons}/ms/cgww4fm`, messages: 9 },
-  { title: "Single-Topic Sermons", note: "One Sunday, one subject", img: "/series/single-topic-sermons.jpg", url: `${org.sermons}/ms/qyjrghx` },
+  { title: "People Get Ready: Revelation", note: "Verse by verse through Revelation", img: "/series/revelation.jpg", url: `${media}/l/hn45gm4-revelation` },
+  { title: "Why Are We Here in Lula?", note: "Connect people with Jesus", img: "/series/why-are-we-here-in-lula.jpg", url: `${media}/l/96775vh-why-are-we-here-in-lula`, messages: 4 },
+  { title: "Take It Up a Notch", note: "2 Peter 1:3–11", img: "/series/take-it-up-a-notch.jpg", url: `${media}/l/95sz832-take-it-up-a-notch`, messages: 2 },
+  { title: "He Is Risen", note: "Easter", img: "/series/he-is-risen.jpg", url: `${media}/l/zp3mdzq-he-is-risen`, messages: 4 },
+  { title: "Relentless Love", note: "The Book of Hosea", img: "/series/relentless-love.jpg", url: `${media}/l/v23txv7-relentless-love-series`, messages: 9 },
+  { title: "Stand", note: "A series on standing firm", img: "/series/stand.jpg", url: `${media}/l/7xdqmmf-stand-series`, messages: 4 },
+  { title: "The Book of James", note: "Real talk. Real life. Real faith.", img: "/series/book-of-james.jpg", url: `${media}/l/g5t4m7d-the-book-of-james`, messages: 10 },
+  { title: "The Book of John", note: "That you may believe", img: "/series/book-of-john.jpg", url: `${media}/l/cgww4fm-book-of-john`, messages: 9 },
+  { title: "Single-Topic Sermons", note: "One Sunday, one subject", img: "/series/single-topic-sermons.jpg", url: `${media}/l/qyjrghx-single-topic-sermons` },
 ];
 
 /** The most recent Sunday messages, newest first. Each links to its page on Subsplash. */
 export const recentSermons = [
-  { date: "Oct 11", title: "Who Else Is Worthy", part: "Revelation, Part 9", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/4qdk2tt` },
-  { date: "Oct 4", title: "The Throne Is Still Occupied", part: "Revelation, Part 8", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/jzcp73m` },
-  { date: "Sep 27", title: "Lukewarm or Lost", part: "Revelation, Part 7", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/vyfc3js` },
-  { date: "Sep 20", title: "Wake Up, Church", part: "Revelation, Part 6", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/x63rbxq` },
-  { date: "Sep 13", title: "Hold Fast", part: "Revelation, Part 5", speaker: "Pastor Brad Thomas", url: `${org.sermons}/mi/6dk8fmg` },
+  { date: "Oct 11", title: "Who Else Is Worthy", part: "Revelation, Part 9", speaker: "Pastor Mike Dorough", url: `${media}/d/4qdk2tt-part-9-who-else-is-worthy` },
+  { date: "Oct 4", title: "The Throne Is Still Occupied", part: "Revelation, Part 8", speaker: "Pastor Mike Dorough", url: `${media}/d/jzcp73m-part-8-the-throne-is-still-occupied` },
+  { date: "Sep 27", title: "Lukewarm or Lost", part: "Revelation, Part 7", speaker: "Pastor Mike Dorough", url: `${media}/d/vyfc3js-part-7-lukewarm-or-lost` },
+  { date: "Sep 20", title: "Wake Up, Church", part: "Revelation, Part 6", speaker: "Pastor Mike Dorough", url: `${media}/d/x63rbxq-part-6-wake-up-church` },
+  { date: "Sep 13", title: "Hold Fast", part: "Revelation, Part 5", speaker: "Pastor Brad Thomas", url: `${media}/d/6dk8fmg-part-5-hold-fast` },
 ];
 
 /** Sunday messages on the church's YouTube channel, newest first. `youtube` is the video ID. */
