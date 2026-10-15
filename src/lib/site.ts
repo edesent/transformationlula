@@ -28,6 +28,7 @@ export const org = {
     "https://www.google.com/maps/dir/?api=1&destination=6102-C+Banks+St,+Lula,+GA+30554",
   facebook: "https://www.facebook.com/tcgainesville",
   instagram: "https://www.instagram.com/tcgainesville/",
+  youtube: "https://www.youtube.com/@TransformationChurchofLula",
   give: "https://subsplash.com/u/-HWRWRC/give",
   sermons: "https://subsplash.com/u/-HWRWRC/media",
 };
@@ -195,16 +196,38 @@ export const leaders = [
   },
 ];
 
-export const series = [
-  { title: "People Get Ready: Revelation", note: "Verse by verse through Revelation", img: "/series/revelation.jpg" },
-  { title: "Why Are We Here in Lula?", note: "Connect people with Jesus", img: "/series/why-are-we-here-in-lula.jpg" },
-  { title: "Take It Up a Notch", note: "2 Peter 1:3–11", img: "/series/take-it-up-a-notch.jpg" },
-  { title: "He Is Risen", note: "Easter", img: "/series/he-is-risen.jpg" },
-  { title: "Relentless Love", note: "The Book of Hosea", img: "/series/relentless-love.jpg" },
-  { title: "Stand", note: "A series on standing firm", img: "/series/stand.jpg" },
-  { title: "The Book of James", note: "Real talk. Real life. Real faith.", img: "/series/book-of-james.jpg" },
-  { title: "The Book of John", note: "That you may believe", img: "/series/book-of-john.jpg" },
-  { title: "Single-Topic Sermons", note: "One Sunday, one subject", img: "/series/single-topic-sermons.jpg" },
+/**
+ * Sermon series, newest first. The first one shows as the current series.
+ * `url` is the series page in their Subsplash media library. `messages` is the
+ * count for a finished series; leave it off while a series is still running.
+ */
+export const series: { title: string; note: string; img: string; url: string; messages?: number }[] = [
+  { title: "People Get Ready: Revelation", note: "Verse by verse through Revelation", img: "/series/revelation.jpg", url: `${org.sermons}/ms/hn45gm4` },
+  { title: "Why Are We Here in Lula?", note: "Connect people with Jesus", img: "/series/why-are-we-here-in-lula.jpg", url: `${org.sermons}/ms/96775vh`, messages: 4 },
+  { title: "Take It Up a Notch", note: "2 Peter 1:3–11", img: "/series/take-it-up-a-notch.jpg", url: `${org.sermons}/ms/95sz832`, messages: 2 },
+  { title: "He Is Risen", note: "Easter", img: "/series/he-is-risen.jpg", url: `${org.sermons}/ms/zp3mdzq`, messages: 4 },
+  { title: "Relentless Love", note: "The Book of Hosea", img: "/series/relentless-love.jpg", url: `${org.sermons}/ms/v23txv7`, messages: 9 },
+  { title: "Stand", note: "A series on standing firm", img: "/series/stand.jpg", url: `${org.sermons}/ms/7xdqmmf`, messages: 4 },
+  { title: "The Book of James", note: "Real talk. Real life. Real faith.", img: "/series/book-of-james.jpg", url: `${org.sermons}/ms/g5t4m7d`, messages: 10 },
+  { title: "The Book of John", note: "That you may believe", img: "/series/book-of-john.jpg", url: `${org.sermons}/ms/cgww4fm`, messages: 9 },
+  { title: "Single-Topic Sermons", note: "One Sunday, one subject", img: "/series/single-topic-sermons.jpg", url: `${org.sermons}/ms/qyjrghx` },
+];
+
+/** The most recent Sunday messages, newest first. Each links to its page on Subsplash. */
+export const recentSermons = [
+  { date: "Oct 11", title: "Who Else Is Worthy", part: "Revelation, Part 9", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/4qdk2tt` },
+  { date: "Oct 4", title: "The Throne Is Still Occupied", part: "Revelation, Part 8", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/jzcp73m` },
+  { date: "Sep 27", title: "Lukewarm or Lost", part: "Revelation, Part 7", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/vyfc3js` },
+  { date: "Sep 20", title: "Wake Up, Church", part: "Revelation, Part 6", speaker: "Pastor Mike Dorough", url: `${org.sermons}/mi/x63rbxq` },
+  { date: "Sep 13", title: "Hold Fast", part: "Revelation, Part 5", speaker: "Pastor Brad Thomas", url: `${org.sermons}/mi/6dk8fmg` },
+];
+
+/** Sunday messages on the church's YouTube channel, newest first. `youtube` is the video ID. */
+export const youtubeSermons = [
+  { youtube: "hpH4HvVlajQ", title: "Characteristics of a Difference Maker", speaker: "Dr. Thomas Hammond", date: "August 2, 2026", passage: "Mark 2", length: "42:57", note: "Building dedication Sunday" },
+  { youtube: "-uuFEaABi5U", title: "Blessed Is the Nation", speaker: "Pastor Mike Dorough", date: "July 5, 2026", passage: "Psalm 33", length: "39:52", note: "Fourth of July weekend" },
+  { youtube: "ejtfS8oRAyg", title: "How to Avoid Spiritual Idolatry", speaker: "Pastor Mike Dorough", date: "February 1, 2026", passage: "Hosea 2", length: "50:52", note: "Relentless Love, Part 3" },
+  { youtube: "z8kdWtZGjiA", title: "How to Handle the Deep Hurts of Life & Marriage", speaker: "Pastor Mike Dorough", date: "January 25, 2026", passage: "Hosea 1", length: "33:32", note: "Relentless Love, Part 2" },
 ];
 
 export const memberCourse = [

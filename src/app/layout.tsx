@@ -61,7 +61,7 @@ const jsonLd = {
     postalCode: org.zip,
     addressCountry: "US",
   },
-  sameAs: [org.facebook, org.instagram],
+  sameAs: [org.facebook, org.instagram, org.youtube],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
