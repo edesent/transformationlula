@@ -29,7 +29,7 @@ export default function Header() {
     >
       <div className="wrap flex h-16 items-center justify-between gap-4 sm:h-20">
         <Link href="/" className="flex items-center gap-2.5 text-white" aria-label="Transformation Church home">
-          <Mark className="h-8 w-11 text-sky sm:h-9 sm:w-12" strokeWidth={5} />
+          <Mark className="h-8 w-auto shrink-0 text-sky sm:h-9" strokeWidth={5} />
           <Wordmark className="text-[1.15rem] sm:text-[1.3rem]" />
         </Link>
 

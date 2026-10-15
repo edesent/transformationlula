@@ -53,7 +53,7 @@ export default function Give() {
           </div>
           <div className="grid grid-cols-10 gap-2 sm:gap-3" aria-hidden data-reveal>
             {Array.from({ length: 100 }).map((_, i) => (
-              <Mark key={i} strokeWidth={6} className={`aspect-[106/70] w-full ${i === 99 ? "text-sun" : "text-sky/35"}`} />
+              <Mark key={i} strokeWidth={6} className={`aspect-[106/96] w-full ${i === 99 ? "text-sun" : "text-sky/35"}`} />
             ))}
           </div>
         </div>

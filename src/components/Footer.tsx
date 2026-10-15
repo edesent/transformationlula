@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="wrap relative grid gap-12 py-16 sm:py-20 md:grid-cols-[1.3fr_1fr_1fr_0.8fr]">
         <div>
           <Link href="/" className="flex items-center gap-3">
-            <Mark className="h-10 w-14 text-sky" strokeWidth={5} />
+            <Mark className="h-10 w-auto shrink-0 text-sky" strokeWidth={5} />
             <Wordmark className="text-2xl" />
           </Link>
           <p className="scripture mt-6 max-w-sm text-xl leading-snug text-white/75">

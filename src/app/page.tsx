@@ -388,7 +388,7 @@ export default function Home() {
               <Mark
                 key={i}
                 strokeWidth={6}
-                className={`aspect-[106/70] w-full ${i === 99 ? "text-sun" : "text-sky/35"}`}
+                className={`aspect-[106/96] w-full ${i === 99 ? "text-sun" : "text-sky/35"}`}
               />
             ))}
           </div>

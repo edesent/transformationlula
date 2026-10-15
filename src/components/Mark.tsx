@@ -1,6 +1,6 @@
 /**
- * The Transformation Church mark, redrawn from their logo: an outlined
- * mountain with a second, smaller peak inside it.
+ * The Transformation Church mark, traced from the church's reference logo.
+ * The taller triangle and thinner inner diagonal keep its original proportions.
  */
 export function Mark({
   className = "",
@@ -13,7 +13,7 @@ export function Mark({
 }) {
   return (
     <svg
-      viewBox="-3 -4 106 70"
+      viewBox="-3 -4 106 96"
       className={`${className} ${draw ? "draw" : ""}`}
       fill="none"
       stroke="currentColor"
@@ -21,8 +21,8 @@ export function Mark({
       strokeLinejoin="miter"
       aria-hidden
     >
-      <polygon points="50,2 2,62 98,62" pathLength={1} />
-      <line x1="30.4" y1="26.5" x2="61" y2="62" pathLength={1} className="late" />
+      <polygon points="50,2 2,84 98,84" pathLength={1} />
+      <line x1="31" y1="34.5" x2="60" y2="84" strokeWidth={strokeWidth * 0.6} pathLength={1} className="late" />
     </svg>
   );
 }
