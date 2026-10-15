@@ -109,8 +109,8 @@ export default function Visit() {
             </p>
             <p className="mt-4 text-lg leading-relaxed text-mute">
               Second, if you have kids from newborn through 5th grade, you can pre-register them for
-              Transformation Kids. They’ll already be in our check-in system, so Sunday morning is one
-              less rush.
+              Transformation Kids. We’ll share their details with the team so they can help you
+              check in when you arrive.
             </p>
           </div>
           <div className="rounded-[2rem] bg-white p-6 shadow-xl shadow-ink/5 sm:p-10">

@@ -65,10 +65,17 @@ freeze at build time.
 
 ## Forms
 
-Contact/prayer, plan-a-visit (with kids' pre-registration) and volunteer forms
+“Plan a visit” buttons open a shared popup on the current page. The popup
+supports Escape, clicking outside, keyboard focus and mobile scrolling. The
+`/visit` page still has the service details, FAQs and an inline copy of the form.
+
+Contact/prayer, plan-a-visit (with optional kids’ details) and volunteer forms
 post to `/api/form`, which forwards to **`FORM_WEBHOOK_URL`** (a Slack incoming
 webhook). Until that env var is set in Vercel, the forms say so and show the
 phone number. You can also set `FORM_SECRET` for the anti-spam token.
+Visit requests include the visitor’s name, contact information, Sunday, party
+size, optional children’s details and notes. Success appears only after the
+webhook accepts the request; a delivery error keeps the form filled in for retry.
 
 ## Giving & sermons
 

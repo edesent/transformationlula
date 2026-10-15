@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Mark } from "@/components/Mark";
 import { Pair } from "@/components/PageHead";
 import { Transform } from "@/components/Transform";
+import { VisitButton } from "@/components/VisitDialog";
 import { org, outreaches, series, services, upcomingDate, upcomingEvents } from "@/lib/site";
 
 // Outreach dates drop off by themselves once they pass.
@@ -46,9 +47,9 @@ export default function Home() {
               <span className="text-sun">Transformation is happening.</span>
             </p>
             <div className="rise flex flex-wrap gap-3" style={{ animationDelay: "0.55s" }}>
-              <Link href="/visit" className="btn btn-sun">
+              <VisitButton className="btn btn-sun">
                 Plan your visit
-              </Link>
+              </VisitButton>
               <Link href="/sermons" className="btn btn-ghost bg-ink/30 backdrop-blur">
                 Watch a sermon
               </Link>
@@ -219,9 +220,9 @@ export default function Home() {
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-3" data-reveal>
-              <Link href="/visit" className="btn btn-ink">
+              <VisitButton className="btn btn-ink">
                 Plan your visit
-              </Link>
+              </VisitButton>
               <Link href="/visit#faq" className="btn border-[1.5px] border-ink/25 hover:bg-mist">
                 Questions & answers
               </Link>
@@ -409,9 +410,9 @@ export default function Home() {
             There’s plenty of parking, and smiling people at the front door.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3" data-reveal>
-            <Link href="/visit" className="btn btn-sun">
+            <VisitButton className="btn btn-sun">
               Plan your visit
-            </Link>
+            </VisitButton>
             <a href={org.directions} className="btn btn-ghost">
               Get directions
             </a>

@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { outreaches, serveTeams } from "@/lib/site";
 import { Phone } from "./Reveal";
 import { useForm } from "./useForm";
 
 function Sent({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-3xl bg-ink p-8 text-white sm:p-10">
+    <div role="status" className="rounded-3xl bg-ink p-8 text-white sm:p-10">
       <p className="display text-4xl text-sun sm:text-5xl">{title}</p>
       <p className="mt-4 text-lg text-white/75">{children}</p>
     </div>
@@ -37,7 +37,7 @@ function NameAndReach({ prefix }: { prefix: string }) {
     <>
       <div className="sm:col-span-2">
         <label htmlFor={`${prefix}-name`} className="label">Your name</label>
-        <input id={`${prefix}-name`} name="name" required className="field" autoComplete="name" />
+        <input id={`${prefix}-name`} name="name" required className="field" autoComplete="name" placeholder="First and last name" />
       </div>
       <div>
         <label htmlFor={`${prefix}-phone`} className="label">Phone</label>
@@ -47,6 +47,7 @@ function NameAndReach({ prefix }: { prefix: string }) {
         <label htmlFor={`${prefix}-email`} className="label">Email</label>
         <input id={`${prefix}-email`} name="email" type="email" className="field" autoComplete="email" />
       </div>
+      <p className="-mt-2 text-sm text-mute sm:col-span-2">Leave a phone number or email so we can get in touch.</p>
     </>
   );
 }
@@ -56,13 +57,14 @@ type Kid = { name: string; age: string; notes: string };
 /** Plan a visit, with optional kids' pre-registration so Sunday check-in is quick. */
 export function VisitForm() {
   const { submit, status, error } = useForm("visit");
+  const id = useId();
   const [kids, setKids] = useState<Kid[]>([]);
 
   if (status === "sent")
     return (
-      <Sent title="We’ll be watching for you.">
-        Someone will meet you at the door with a smile on Sunday at 10:00.
-        {kids.length > 0 && " Your kids are pre-registered, so check-in will take a minute."}
+      <Sent title="We can’t wait to meet you.">
+        Your visit details have been sent to our team. We look forward to welcoming you!
+        {kids.some((kid) => kid.name.trim()) && " We’ve shared your kids’ details with the team, too."}
       </Sent>
     );
 
@@ -78,14 +80,14 @@ export function VisitForm() {
         submit({ ...Object.fromEntries(fd.entries()), kids: kids.filter((k) => k.name.trim()) });
       }}
     >
-      <NameAndReach prefix="v" />
+      <NameAndReach prefix={id} />
       <div>
-        <label htmlFor="v-when" className="label">Which Sunday?</label>
-        <input id="v-when" name="when" className="field" placeholder="This Sunday, the 18th…" />
+        <label htmlFor={`${id}-when`} className="label">Which Sunday?</label>
+        <input id={`${id}-when`} name="when" className="field" placeholder="This Sunday, or a date" />
       </div>
       <div>
-        <label htmlFor="v-size" className="label">How many coming?</label>
-        <input id="v-size" name="size" type="number" min={1} max={20} defaultValue={1} className="field" />
+        <label htmlFor={`${id}-size`} className="label">How many coming?</label>
+        <input id={`${id}-size`} name="size" type="number" min={1} max={20} defaultValue={1} className="field" />
       </div>
 
       <div className="sm:col-span-2">
@@ -112,14 +114,14 @@ export function VisitForm() {
       </div>
 
       <div className="sm:col-span-2">
-        <label htmlFor="v-notes" className="label">Anything we should know? (optional)</label>
-        <textarea id="v-notes" name="notes" rows={3} className="field" placeholder="A wheelchair, a question, a prayer request…" />
+        <label htmlFor={`${id}-notes`} className="label">Anything we should know? (optional)</label>
+        <textarea id={`${id}-notes`} name="notes" rows={3} className="field" placeholder="A wheelchair, a question, a prayer request…" />
       </div>
       <Honeypot />
       {status === "error" && <ErrorNote error={error} />}
       <div className="sm:col-span-2">
         <button type="submit" className="btn btn-ink" disabled={status === "sending"}>
-          {status === "sending" ? "Sending…" : "We’re coming"}
+          {status === "sending" ? "Sending…" : "Plan my visit"}
         </button>
       </div>
     </form>

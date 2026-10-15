@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Reveal } from "@/components/Reveal";
+import { VisitDialogProvider } from "@/components/VisitDialog";
 import { isDemo, org, siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -73,9 +74,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <VisitDialogProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </VisitDialogProvider>
         <Reveal />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>

@@ -22,10 +22,23 @@ export function useForm(kind: FormKind) {
       setStatus("sending");
       setError("");
       try {
+        let formToken = token;
+        if (!formToken || Date.now() - Number(formToken.split(".")[0]) > 6 * 60 * 60 * 1000) {
+          const response = await fetch("/api/form", { cache: "no-store" });
+          if (!response.ok) throw new Error("Could not prepare the form.");
+          const data = await response.json();
+          if (typeof data.token !== "string") throw new Error("Could not prepare the form.");
+          formToken = data.token;
+          setToken(formToken);
+        }
+        // Autofill can complete the form before the signed anti-spam token is ready.
+        const wait = Number(formToken.split(".")[0]) + 3100 - Date.now();
+        if (wait > 0 && wait <= 3100) await new Promise((resolve) => setTimeout(resolve, wait));
+
         const res = await fetch("/api/form", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...fields, kind, token }),
+          body: JSON.stringify({ ...fields, kind, token: formToken }),
         });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {

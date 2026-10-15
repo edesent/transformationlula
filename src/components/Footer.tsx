@@ -2,6 +2,7 @@ import Link from "next/link";
 import { nav, org, services } from "@/lib/site";
 import { Mark, Wordmark } from "./Mark";
 import { Phone } from "./Reveal";
+import { VisitButton } from "./VisitDialog";
 
 export default function Footer() {
   return (
@@ -53,9 +54,11 @@ export default function Footer() {
           <ul className="mt-4 space-y-2 font-semibold text-white/80">
             {[...nav, { href: "/visit", label: "Plan a visit" }, { href: "/contact", label: "Contact" }].map((n) => (
               <li key={n.href}>
-                <Link href={n.href} className="hover:text-sky">
-                  {n.label}
-                </Link>
+                {n.href === "/visit" ? (
+                  <VisitButton className="hover:text-sky">{n.label}</VisitButton>
+                ) : (
+                  <Link href={n.href} className="hover:text-sky">{n.label}</Link>
+                )}
               </li>
             ))}
           </ul>

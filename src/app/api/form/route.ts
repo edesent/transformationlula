@@ -11,7 +11,7 @@ import { org } from "@/lib/site";
  *
  * Spam defences: a signed load-time token that must be at least 3 seconds
  * old, a honeypot, a per-IP rate limit, and no web links in free text.
- * Anything that trips a defence gets a fake success and is dropped.
+ * The honeypot drops bots; validation failures and rate limits show a clear retry error.
  */
 
 export const runtime = "nodejs";
@@ -160,12 +160,19 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  }
 
   if (body.website || body.company) return fake();
-  if (!tokenOk(body.token)) return fake();
+  if (!tokenOk(body.token)) {
+    return NextResponse.json({ error: "Please wait a moment and send the form again." }, { status: 400 });
+  }
 
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (rateLimited(`${body.kind}:${ip}`)) return fake();
+  if (rateLimited(`${body.kind}:${ip}`)) {
+    return NextResponse.json({ error: "You’ve sent several messages. Please try again in a few minutes, or call us." }, { status: 429 });
+  }
 
   const built =
     body.kind === "contact"
@@ -176,7 +183,9 @@ export async function POST(request: Request) {
           ? volunteerMessage(body)
           : null;
   if (!built) return NextResponse.json({ error: "Unknown form." }, { status: 400 });
-  if ("spam" in built) return fake();
+  if ("spam" in built) {
+    return NextResponse.json({ error: "Please leave website links out of the form and try again." }, { status: 400 });
+  }
   if ("error" in built) return NextResponse.json({ error: built.error }, { status: 400 });
 
   const webhook = process.env.FORM_WEBHOOK_URL;
@@ -191,7 +200,12 @@ export async function POST(request: Request) {
     const res = await fetch(webhook, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: built.text }),
+      body: JSON.stringify({
+        text: built.text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+        unfurl_links: false,
+        unfurl_media: false,
+      }),
+      signal: AbortSignal.timeout(10_000),
     });
     if (!res.ok) throw new Error(String(res.status));
   } catch {

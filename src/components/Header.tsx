@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/site";
 import { Mark, Wordmark } from "./Mark";
+import { VisitButton } from "./VisitDialog";
 
 /** Floats clear over every page's photo masthead, then turns solid navy. */
 export default function Header() {
@@ -45,9 +46,9 @@ export default function Header() {
               {n.label}
             </Link>
           ))}
-          <Link href="/visit" className="btn btn-sun !px-5 !py-2.5">
+          <VisitButton className="btn btn-sun !px-5 !py-2.5">
             Plan a visit
-          </Link>
+          </VisitButton>
         </nav>
 
         <button
@@ -71,9 +72,9 @@ export default function Header() {
                 {n.label}
               </Link>
             ))}
-            <Link href="/visit" className="btn btn-sun mt-3">
+            <VisitButton className="btn btn-sun mt-3" onClick={() => setOpen(false)}>
               Plan a visit
-            </Link>
+            </VisitButton>
           </div>
         </div>
       )}
