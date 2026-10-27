@@ -117,3 +117,17 @@ redirect old SnapPages URLs (`/leadership`, `/what-we-believe`, `/faq-s`,
   left out until updated.
 - Scripture quotes: Romans 12:2 (ESV wording), Romans 8:28 (KJV), Matthew 21:13.
   Swap to their preferred translation.
+
+## Forms: where messages go
+
+`/api/form` handles the contact/prayer, plan-a-visit and volunteer forms. Set
+env vars in Vercel (Project → Settings → Environment Variables), then redeploy.
+Pick one or both:
+
+| Delivery | Env vars |
+| --- | --- |
+| Slack (or Teams) | `FORM_WEBHOOK_URL` = an incoming-webhook URL |
+| Email (Resend) | `RESEND_API_KEY`, `FORM_EMAIL_TO` (comma-separated, e.g. `mike@wearetransformation.org,david@…`), `FORM_EMAIL_FROM` (e.g. `Transformation Church <forms@wearetransformation.org>`, on a domain verified in Resend) |
+
+Email replies go straight to the person who filled in the form. If neither is
+set, the forms tell visitors to call instead of pretending to send.

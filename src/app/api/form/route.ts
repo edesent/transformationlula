@@ -5,9 +5,14 @@ import { org } from "@/lib/site";
 /**
  * The endpoint behind every form: contact/prayer, plan-a-visit and volunteer.
  *
- * Messages go to FORM_WEBHOOK_URL (a Slack or Teams incoming webhook) so they
- * reach Pastor Mike's phone in seconds. Until that is set the endpoint
- * answers 503 and the form honestly tells people to call instead.
+ * Messages can go two ways, and the church picks one or both:
+ *   - Slack/Teams: FORM_WEBHOOK_URL (an incoming webhook), so they reach
+ *     Pastor Mike's phone in seconds.
+ *   - Email via Resend: RESEND_API_KEY + FORM_EMAIL_TO (comma-separated) and
+ *     FORM_EMAIL_FROM (an address on a domain verified in Resend). Replying
+ *     to the email answers the person who filled in the form.
+ * Until at least one is set the endpoint answers 503 and the form honestly
+ * tells people to call instead.
  *
  * Spam defences: a signed load-time token that must be at least 3 seconds
  * old, a honeypot, a per-IP rate limit, and no web links in free text.
@@ -17,7 +22,7 @@ import { org } from "@/lib/site";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const SECRET = process.env.FORM_SECRET || process.env.FORM_WEBHOOK_URL || "";
+const SECRET = process.env.FORM_SECRET || process.env.FORM_WEBHOOK_URL || process.env.RESEND_API_KEY || "";
 const MIN_FILL_MS = 3000;
 const MAX_AGE_MS = 1000 * 60 * 60 * 6;
 
@@ -189,26 +194,55 @@ export async function POST(request: Request) {
   if ("error" in built) return NextResponse.json({ error: built.error }, { status: 400 });
 
   const webhook = process.env.FORM_WEBHOOK_URL;
-  if (!webhook) {
+  const resendKey = process.env.RESEND_API_KEY;
+  const emailTo = (process.env.FORM_EMAIL_TO || "").split(",").map((a) => a.trim()).filter(Boolean);
+  const sendEmail = Boolean(resendKey && emailTo.length);
+  if (!webhook && !sendEmail) {
     return NextResponse.json(
       { error: "Our online form isn’t connected yet. Please call Pastor Mike. We’d love to hear from you." },
       { status: 503 },
     );
   }
 
-  try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: built.text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-        unfurl_links: false,
-        unfurl_media: false,
+  const replyTo = clean(body.email, 120);
+  const subject = built.text.split("\n")[0].replace(/\*/g, "");
+  const attempts: Promise<Response>[] = [];
+
+  if (webhook) {
+    attempts.push(
+      fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: built.text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+          unfurl_links: false,
+          unfurl_media: false,
+        }),
+        signal: AbortSignal.timeout(10_000),
       }),
-      signal: AbortSignal.timeout(10_000),
-    });
-    if (!res.ok) throw new Error(String(res.status));
-  } catch {
+    );
+  }
+  if (sendEmail) {
+    attempts.push(
+      fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from: process.env.FORM_EMAIL_FROM || `${org.short} website <onboarding@resend.dev>`,
+          to: emailTo,
+          subject,
+          text: built.text.replace(/\*/g, ""),
+          ...(okEmail(replyTo) && replyTo ? { reply_to: replyTo } : {}),
+        }),
+        signal: AbortSignal.timeout(10_000),
+      }),
+    );
+  }
+
+  // The message counts as delivered if at least one channel took it.
+  const results = await Promise.allSettled(attempts);
+  const delivered = results.some((r) => r.status === "fulfilled" && r.value.ok);
+  if (!delivered) {
     return NextResponse.json({ error: "We couldn’t send that just now. Please call Pastor Mike instead." }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
