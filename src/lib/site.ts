@@ -125,8 +125,8 @@ export const outreaches: Outreach[] = [
     blurb:
       "Lula’s Christmas night out. Carols, cocoa, lights and the story of the first Christmas, told in the open air for the whole town. Everyone is welcome.",
     needs: ["Hot cocoa table", "Carolers", "Set-up crew", "Hand warmers"],
-    photo: "/photos/rev-9-1-21-wide.png",
-    photoAlt: "Christmas in the Park at Transformation Church",
+    photo: "/photos/christmas-candlelight.jpg",
+    photoAlt: "The church family singing by candlelight at a Christmas service",
   },
 ];
 
